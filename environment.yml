@@ -1,6 +1,9 @@
+name:
+  - step-size-opt-env
 channels:
   - conda-forge
-
+  - default
+  - anaconda
 dependencies:
   - matplotlib.base
   - numpy
