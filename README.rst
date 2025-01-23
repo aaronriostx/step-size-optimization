@@ -23,7 +23,7 @@ Conda environment
 
 .. code-block::
    
-   $ conda create -f environment.yml
+   $ conda env create -f environment.yml
    $ conda activate step-size-opt-env
 
 2. It is recommended to update the conda environment upon startup to ensure up-to-date dependencies:
