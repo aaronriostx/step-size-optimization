@@ -1,0 +1,10 @@
+name: step-size-opt-env
+channels:
+  - conda-forge
+  - default
+  - anaconda
+dependencies:
+  - ipython
+  - matplotlib
+  - numpy
+  - scipy
