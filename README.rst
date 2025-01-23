@@ -28,6 +28,6 @@ Conda environment
 
 2. It is recommended to update the conda environment upon startup to ensure up-to-date dependencies:
 
-..code-block::
+.. code-block::
 
    $ conda env update
