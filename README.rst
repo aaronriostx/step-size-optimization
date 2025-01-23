@@ -12,19 +12,22 @@ Installation
 Cloning the repository
 ======================
 
-  .. code-block::
-     $ git clone git@github.com:aaronriostx/step-size-optimization.git
+.. code-block::
+   
+   $ git clone git@github.com:aaronriostx/step-size-optimization.git
 
 Conda environment
 =================
 
 1. Create and activate the conda environment with the supplied ``environment.yml`` file:
 
-  .. code-block::
-     $ conda create -f environment.yml
-     $ conda activate step-size-opt-env
+.. code-block::
+   
+   $ conda create -f environment.yml
+   $ conda activate step-size-opt-env
 
 2. It is recommended to update the conda environment upon startup to ensure up-to-date dependencies:
 
-  ..code-block::
-    $ conda env update
+..code-block::
+
+   $ conda env update
