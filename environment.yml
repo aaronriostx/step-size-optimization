@@ -4,5 +4,7 @@ channels:
   - default
   - anaconda
 dependencies:
+  - ipython
   - matplotlib
   - numpy
+  - scipy
