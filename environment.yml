@@ -1,5 +1,4 @@
-name:
-  - step-size-opt-env
+name: step-size-opt-env
 channels:
   - conda-forge
   - default
