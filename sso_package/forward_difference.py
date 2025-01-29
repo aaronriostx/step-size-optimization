@@ -1,7 +1,5 @@
 #! /usr/bin/env python
 
-import argparse
-
 def forward_difference(func, x, h):
     """Performs the forward finite difference (FFD) operation on a single-variable function.
 
