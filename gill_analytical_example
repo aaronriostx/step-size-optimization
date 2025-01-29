@@ -24,19 +24,20 @@ def my_func(x):
         return 0
     except ZeroDivisionError:
         return 0
-machine_epsilon
+
+# Obtain machine precision    
+evaluation_point = 1
+conditional_error_bounds = (0.001, 0.1)
 
 python_script = "gill_step_size_optimizer.py"
-script_options = f"--func {func} "
+script_options = f"--func {my_func} "
 script_options += f"--evaluation_point {evaluation_point} "
-script_options += f"--evaluation_point {evaluation_point} "
-script_options += f"--error_bound {error_bound} "
 script_options += f"--conditional_error_bounds {conditional_error_bounds}"
 
 workflow.extend(env.PythonScript(
-    target = [],
+    target = [f"test.stdout"],
     source = [f"{sso_package_abspath / python_script}"],
-    script_options = script_options
+    subcommand_options = script_options
 ))
 
 # Collector alias based on parent directory name
