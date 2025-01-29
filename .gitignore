@@ -3,3 +3,4 @@ build*/
 
 # Files
 .sconsign.dblite
+*__pycache__*
