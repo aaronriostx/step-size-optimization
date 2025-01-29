@@ -102,7 +102,6 @@ def main(evaluation_point, lower_c_bound, upper_c_bound, output_csv_filename, er
 
     # Initialize pandas dataframe and arrays to store data
     df = pd.DataFrame()
-    iters_array = []
     cond_error_array = []
     hs_array = []
     h_optimal_array = []
@@ -130,7 +129,6 @@ def main(evaluation_point, lower_c_bound, upper_c_bound, output_csv_filename, er
     iter = 0
 
     # Append initialized values to arrays
-    iters_array.append(iter)
     cond_error_array.append(cond_error_current)
     hs_array.append(hs_initial)
     h_optimal_array.append(h_optimal_initial)
@@ -154,7 +152,6 @@ def main(evaluation_point, lower_c_bound, upper_c_bound, output_csv_filename, er
         h_optimal_current = optimal_step_size(error_bound, phi)
 
         # Append initialized values to arrays
-        iters_array.append(iter)
         cond_error_array.append(cond_error_current)
         hs_array.append(hs)
         h_optimal_array.append(h_optimal_current)
@@ -172,13 +169,12 @@ def main(evaluation_point, lower_c_bound, upper_c_bound, output_csv_filename, er
         print(f'optimized step size: {h_optimal_current}')
     
     # Write data to dataframe 
-    df['Iteration'] = iters_array
     df['Cond. Error'] = cond_error_array
     df['2nd-order step size'] = hs_array
     df['1st-order optimal step size'] = h_optimal_array
 
     # Export to file
-    df.to_csv(output_csv_filename)
+    df.to_csv(output_csv_filename, index=True)
 
     return 0
 
