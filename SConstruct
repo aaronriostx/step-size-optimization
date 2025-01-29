@@ -35,6 +35,9 @@ env = waves.scons_extensions.WAVESEnvironment(
     TARSUFFIX=".tar.bz2",
 )
 
+# Empty defaults list to avoid building all simulation targets by default
+env.Default()
+
 # Project internal variables
 project_configuration = pathlib.Path(inspect.getfile(lambda: None))
 project_dir = project_configuration.parent
