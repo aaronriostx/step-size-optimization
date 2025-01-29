@@ -78,6 +78,7 @@ env.PrependENVPath("PYTHONPATH", project_dir)
 env.Append(
     BUILDERS={
         "CondaEnvironment": waves.scons_extensions.conda_environment(),
+        "PythonScript": waves.scons_extensions.python_builder_factory()
     }
 )
 env.Append(SCANNERS=waves.scons_extensions.sphinx_scanner())
@@ -98,6 +99,14 @@ SConscript(
     variant_dir=build_dir,
     exports={"env": env, "project_variables": project_variables},
 )
+
+# Add workflow targets
+workflow_configurations = [
+    "gill_analytical_example",
+]
+for workflow in workflow_configurations:
+    build_dir = env["variant_dir_base"] / workflow
+    SConscript(workflow, variant_dir=build_dir, exports={"env": env}, duplicate=False)
 
 # Add default target list to help message
 # Add aliases to help message so users know what build target options are available

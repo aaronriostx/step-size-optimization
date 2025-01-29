@@ -1,0 +1,36 @@
+#! /usr/bin/env python
+
+import numpy as np
+import pathlib
+
+# Inherit parent construction environment
+Import("env") # type: ignore
+
+# Set project paths
+sso_package_abspath = env["sso_package_abspath"]
+
+# Workflow variables
+build_directory = pathlib.Path(Dir(".").abspath)
+workflow_name = build_directory.name
+
+# Initialize workflow to build alias for targets
+workflow = []
+
+# Set evaluation point    
+evaluation_point = 1
+
+# Gill Step Size Optimizer
+python_script = "gill_step_size_optimizer.py"
+output_csv_filename = "test.csv"
+
+script_options = f"--evaluation_point {evaluation_point} "
+script_options += f"--output_csv_filename {output_csv_filename} "
+
+workflow.extend(env.PythonScript(
+    target = [output_csv_filename],
+    source = [f"{sso_package_abspath / python_script}"],
+    subcommand_options = script_options
+))
+
+# Collector alias based on parent directory name
+env.Alias(workflow_name, workflow)
