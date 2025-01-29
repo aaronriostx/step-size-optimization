@@ -78,6 +78,7 @@ env.PrependENVPath("PYTHONPATH", project_dir)
 env.Append(
     BUILDERS={
         "CondaEnvironment": waves.scons_extensions.conda_environment(),
+        "PythonScript": waves.scons_extensions.python_script()
     }
 )
 env.Append(SCANNERS=waves.scons_extensions.sphinx_scanner())
