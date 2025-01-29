@@ -21,11 +21,13 @@ evaluation_point = 1
 
 # Gill Step Size Optimizer
 python_script = "gill_step_size_optimizer.py"
-output_file = "test.stdout"
+output_csv_filename = "test.csv"
+
 script_options = f"--evaluation_point {evaluation_point} "
+script_options += f"--output_csv_filename {output_csv_filename} "
 
 workflow.extend(env.PythonScript(
-    target = [output_file],
+    target = [output_csv_filename],
     source = [f"{sso_package_abspath / python_script}"],
     subcommand_options = script_options
 ))
