@@ -121,7 +121,7 @@ def main(evaluation_point, lower_c_bound, upper_c_bound, output_csv_filename, er
     phi = central_difference(func, x1, hs_initial)
     
     # Compute  initial conditional error
-    cond_error = conditional_error(error_bound, hs_initial, phi)
+    cond_error_current = conditional_error(error_bound, hs_initial, phi)
 
     # Compute initial step size based off initial parameters
     h_optimal_initial = optimal_step_size(error_bound, phi)
@@ -131,19 +131,19 @@ def main(evaluation_point, lower_c_bound, upper_c_bound, output_csv_filename, er
 
     # Append initialized values to arrays
     iters_array.append(iter)
-    cond_error_array.append(cond_error)
+    cond_error_array.append(cond_error_current)
     hs_array.append(hs_initial)
     h_optimal_array.append(h_optimal_initial)
 
     # Setup optimization loop
-    while cond_error < lower_c_bound or cond_error > upper_c_bound:
+    while cond_error_current < lower_c_bound or cond_error_current > upper_c_bound:
         
         # Update hs and phi if conditional error is out of bounds
-        if cond_error > upper_c_bound:
+        if cond_error_current > upper_c_bound:
             hs = hs_initial*10
             phi = central_difference(func, x1, hs)
         
-        elif cond_error < lower_c_bound:
+        elif cond_error_current < lower_c_bound:
             hs = hs_initial/10
             phi = central_difference(func, x1, hs)
         
