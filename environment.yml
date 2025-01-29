@@ -7,5 +7,12 @@ dependencies:
   - ipython
   - matplotlib
   - numpy
+  - pandas
+  - pyyaml
+  - pytest
+  - salib
+  - scons>=4.6
   - scipy
+  - seaborn
   - waves
+  - xarray
