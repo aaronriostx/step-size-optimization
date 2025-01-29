@@ -20,10 +20,11 @@ workflow = []
 evaluation_point = 1
 
 python_script = "gill_step_size_optimizer.py"
+output_file = "test.stdout"
 script_options = f"--evaluation_point {evaluation_point} "
 
 workflow.extend(env.PythonScript(
-    target = [f"test.stdout"],
+    target = [output_file],
     source = [f"{sso_package_abspath / python_script}"],
     subcommand_options = script_options
 ))
