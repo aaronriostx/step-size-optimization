@@ -25,3 +25,17 @@ AddOption(
     action="store_true",
     help="Boolean to force building of conditionally ignored targets. (default: '%default')",
 )
+
+# Project internal variables
+project_configuration = pathlib.Path(inspect.getfile(lambda: None))
+project_dir = project_configuration.parent
+project_name = project_dir.name
+version = "0.1.0"
+author_list = [
+    "G. Aaron Rios",
+]
+author_latex = r" \and ".join(author_list)
+latex_project_name = project_name.replace("_", "-")
+
+# Project source directories
+documentation_source_dir = pathlib.Path("docs")
