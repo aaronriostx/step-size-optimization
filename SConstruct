@@ -39,3 +39,19 @@ latex_project_name = project_name.replace("_", "-")
 
 # Project source directories
 documentation_source_dir = pathlib.Path("docs")
+
+# Set project configuration to dictionary
+project_variables = {
+    "project_configuration": project_configuration,
+    "project_dir": project_dir,
+    "project_name": project_name,
+    "version": version,
+    "author_list": author_list,
+    "author_html": ", ".join(author for author in author_list),
+    "author_latex": author_latex,
+    "documentation_pdf": f"{latex_project_name}-{version}.pdf",
+    "report_pdf": f"{latex_project_name}-{version}-report.pdf",
+    "documentation_abspath": project_dir / documentation_source_dir,
+}
+for key, value in project_variables.items():
+    env[key] = value
