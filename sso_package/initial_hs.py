@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+import numpy as np
 
 def initial_hs(func, x, error_bound):
     """Computes the initial step size for the 2nd order FD derivative (phi).
