@@ -26,6 +26,15 @@ AddOption(
     help="Boolean to force building of conditionally ignored targets. (default: '%default')",
 )
 
+# Inherit user's full environment and set project options
+env = waves.scons_extensions.WAVESEnvironment(
+    ENV=os.environ.copy(),
+    variant_dir_base=pathlib.Path(GetOption("variant_dir_base")),
+    unconditional_build=GetOption("unconditional_build"),
+    TARFLAGS="-c -j",
+    TARSUFFIX=".tar.bz2",
+)
+
 # Project internal variables
 project_configuration = pathlib.Path(inspect.getfile(lambda: None))
 project_dir = project_configuration.parent
