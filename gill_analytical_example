@@ -27,12 +27,10 @@ def my_func(x):
 
 # Obtain machine precision    
 evaluation_point = 1
-conditional_error_bounds = (0.001, 0.1)
 
 python_script = "gill_step_size_optimizer.py"
 script_options = f"--func {my_func} "
 script_options += f"--evaluation_point {evaluation_point} "
-script_options += f"--conditional_error_bounds {conditional_error_bounds}"
 
 workflow.extend(env.PythonScript(
     target = [f"test.stdout"],
