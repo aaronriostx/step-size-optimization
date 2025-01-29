@@ -71,3 +71,17 @@ for key, value in project_variables.items():
 # Make the project package importable for: (1) SConscript files and (2) Python environments
 sys.path.insert(0, str(project_dir))
 env.PrependENVPath("PYTHONPATH", project_dir)
+
+# Add WAVES builders
+env.Append(
+    BUILDERS={
+        "CondaEnvironment": waves.scons_extensions.conda_environment(),
+    }
+)
+# Dump the Conda environment as documentation of as-built target environment
+environment_target = env.CondaEnvironment(
+    target=[env["variant_dir_base"] / "environment.yaml"],
+    source=[],
+)
+env.AlwaysBuild(environment_target)
+env.Alias("environment", environment_target)
