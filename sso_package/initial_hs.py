@@ -9,7 +9,7 @@ def initial_hs(func, x, error_bound):
 
     :param function func: The user-defined single variable function (i.e f(x))
     :param float x: The evaluation point for the 2nd order FD derivative operation
-    :parm float error_bound: User-defined error bound, typically prescribed as the machine precision.
+    :param float error_bound: User-defined error bound, typically prescribed as the machine precision.
 
     :returns: Initial step size value for the 2nd order FD derivative (phi)
     """

@@ -8,7 +8,7 @@ def central_difference(func, x, hs):
 
     :param function func: The user-defined single variable function (i.e f(x))
     :param float x: The evaluation point for the FFD operation
-    :parm float hs: The step size for the CFD operation to approximate the 2nd-order derivative
+    :param float hs: The step size for the CFD operation to approximate the 2nd-order derivative
 
     :returns: Float value for CFD 2nd-order derivative (phi) at evaluation point, x
     """

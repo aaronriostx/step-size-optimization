@@ -7,7 +7,7 @@ def forward_difference(func, x, h):
 
     :param function func: The user-defined single variable function (i.e f(x))
     :param float x: The evaluation point for the FFD operation
-    :parm float h: The step size for the FFD operation
+    :param float h: The step size for the FFD operation
 
     :returns: Float value for FFD derivative at evaluation point, x
     """
