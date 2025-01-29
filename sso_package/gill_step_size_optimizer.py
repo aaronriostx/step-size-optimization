@@ -1,9 +1,11 @@
 #! /usr/bin/env python
 
 import argparse
-import numpy as np
 import pathlib
 import sys
+
+import numpy as np
+import pandas as pd
 
 import sso_package.my_func as my_func
 
@@ -46,8 +48,6 @@ def central_difference(func, x, hs):
     phi = (func(x+hs) - 2*func(x) + func(x-hs))/hs**2
     
     return phi
-
-import numpy as np
 
 def conditional_error(error_bound, hs, phi):
     """Computes the conditional error from user-defined error bound, current step size and 
@@ -99,6 +99,13 @@ def main(evaluation_point, lower_c_bound, upper_c_bound, error_bound=None, max_i
     # Set the variable equal to the single-variable function
     func = my_func.my_func
 
+    # Initialize pandas dataframe and arrays to store data
+    df = pd.DataFrame()
+    iters_array = []
+    cond_error_array = []
+    hs_array = []
+    h_optimal = []
+
     # Evaluation point
     x1 = evaluation_point
 
@@ -115,10 +122,19 @@ def main(evaluation_point, lower_c_bound, upper_c_bound, error_bound=None, max_i
     # Compute  initial conditional error
     cond_error = conditional_error(error_bound, hs_initial, phi)
 
+    # Compute initial step size based off initial parameters
+    h_optimal_initial = optimal_step_size(error_bound, phi)
+
     # Initialize iterations to prevent infinite looping
     iter = 0
-    
-    # Setup conditional loop
+
+    # Append initialized values to arrays
+    iters_array.append(iter)
+    cond_error_array.append(cond_error)
+    hs_array.append(hs_initial)
+    h_optimal.append(h_optimal_initial)
+
+    # Setup optimization loop
     while cond_error < lower_c_bound or cond_error > upper_c_bound:
         
         # Update hs and phi if conditional error is out of bounds
@@ -133,7 +149,13 @@ def main(evaluation_point, lower_c_bound, upper_c_bound, error_bound=None, max_i
         # Compute conditional error with updated values
         cond_error = conditional_error(error_bound, hs, phi)
 
-        # Check number of iterations
+        # Append initialized values to arrays
+        iters_array.append(iter)
+        cond_error_array.append(cond_error)
+        hs_array.append(hs_initial)
+        h_optimal.append(h_optimal_initial)
+
+        # Update number of iterations
         iter += 1
         if iter >= max_iters:
             break
@@ -147,6 +169,8 @@ def main(evaluation_point, lower_c_bound, upper_c_bound, error_bound=None, max_i
         print(f'error bound: {error_bound}')
         print(f'conditional error, in range ({lower_c_bound}, {upper_c_bound}): {cond_error}')
         print(f'optimized step size: {h_optimal}')
+    
+    # Write data to dataframe 
     
     return 0
 
