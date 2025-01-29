@@ -67,3 +67,7 @@ project_variables = {
 }
 for key, value in project_variables.items():
     env[key] = value
+
+# Make the project package importable for: (1) SConscript files and (2) Python environments
+sys.path.insert(0, str(project_dir))
+env.PrependENVPath("PYTHONPATH", project_dir)
