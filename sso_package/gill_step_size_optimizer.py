@@ -9,8 +9,9 @@ import sso_package.initial_hs
 import sso_package.central_difference
 import sso_package.conditional_error
 import sso_package.optimal_step_size
+import sso_package.machine_precision
 
-def optimize_step_size(func, evaluation_point, error_bound, conditional_error_bounds, max_iters=50, print_info=False):
+def optimize_step_size(func, evaluation_point, conditional_error_bounds, error_bound=None, max_iters=50, print_info=False):
     """Runs the algorithm to determine optimal step size for first derivative of a function 
 
     User-defined function is used and evaluated at the evaluation point. The algorithm
@@ -19,8 +20,8 @@ def optimize_step_size(func, evaluation_point, error_bound, conditional_error_bo
     
     :param function func: Analytical function that takes in single evaluation point
     :param float evaluation_point: Evaluation point passed into the function
-    :param float error_bound: User-defined error bound
     :param tuple conditional_error_bounds: Lower and upper limit to threshold the conditional error, i.e. (0.001, 0.1)
+    :param float error_bound: Error bound (Default: Machine precision)
     :param int max_iters: Maximum iterations of the optimization loop (Default: 50)
     :param boolean print_info: Prints the conditional error and optimized step size (Default: False)
 
@@ -41,6 +42,10 @@ def optimize_step_size(func, evaluation_point, error_bound, conditional_error_bo
     
     # Compute  initial conditional error
     cond_error = conditional_error(error_bound, hs_initial, phi)
+
+    # Get machine precision if no value is passed for error_bound
+    if error_bound == None:
+        error_bound = sso_package.machine_precision()
 
     # Initialize iterations to prevent infinite looping
     iter = 0
@@ -86,7 +91,7 @@ def get_parser():
         help="A single-variable function used to estimate the FFD approximation")
     parser.add_argument('--evaluation_point', type=float, required=True,
         help="The evaluation point for the FFD approximation")
-    parser.add_argument('--error_bound', type=float, required=True,
+    parser.add_argument('--error_bound', type=float, required=False,
         help="The user-defined error bound, typically it is the machine precision")
     parser.add_argument('--conditional_error_bounds', type=tuple, required=True,
         help="The user-defined error bound threshold")
