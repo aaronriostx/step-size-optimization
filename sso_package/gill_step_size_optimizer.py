@@ -98,11 +98,9 @@ def main(evaluation_point, lower_c_bound, upper_c_bound, error_bound=None, max_i
     """
     # Set the variable equal to the single-variable function
     func = my_func.my_func
-    print(func(1))
 
     # Evaluation point
     x1 = evaluation_point
-    print(x1)
 
     # Get machine precision if no value is passed for error_bound
     if error_bound == None:
@@ -140,13 +138,14 @@ def main(evaluation_point, lower_c_bound, upper_c_bound, error_bound=None, max_i
         if iter >= max_iters:
             break
         
-    # Return the optimal step size
+    # Compute the optimal step size
     h_optimal = optimal_step_size(error_bound, phi)
     
     # Print information to console
     if print_info == True:
         print(f'iteration: {iter}')
-        print(f'conditional error: {cond_error}')
+        print(f'error bound: {error_bound}')
+        print(f'conditional error, in range ({lower_c_bound}, {upper_c_bound}): {cond_error}')
         print(f'optimized step size: {h_optimal}')
     
     return 0
