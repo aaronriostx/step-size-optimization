@@ -16,21 +16,11 @@ workflow_name = build_directory.name
 # Initialize workflow to build alias for targets
 workflow = []
 
-# Define input arguments for the Gill optimizer
-def my_func(x):
-    try:
-        return np.exp(x)/np.sqrt(np.sin(x)**3 + np.cos(x)**3)
-    except RuntimeWarning:
-        return 0
-    except ZeroDivisionError:
-        return 0
-
-# Obtain machine precision    
+# Set evaluation point    
 evaluation_point = 1
 
 python_script = "gill_step_size_optimizer.py"
-script_options = f"--func {my_func} "
-script_options += f"--evaluation_point {evaluation_point} "
+script_options = f"--evaluation_point {evaluation_point} "
 
 workflow.extend(env.PythonScript(
     target = [f"test.stdout"],
