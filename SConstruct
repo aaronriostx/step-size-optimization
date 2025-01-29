@@ -51,6 +51,7 @@ latex_project_name = project_name.replace("_", "-")
 
 # Project source directories
 documentation_source_dir = pathlib.Path("docs")
+sso_package_source_dir = pathlib.Path("sso_package")
 
 # Set project configuration to dictionary
 project_variables = {
@@ -64,7 +65,8 @@ project_variables = {
     "documentation_pdf": f"{latex_project_name}-{version}.pdf",
     "report_pdf": f"{latex_project_name}-{version}-report.pdf",
     "documentation_abspath": project_dir / documentation_source_dir,
-}
+    "sso_package_abspath": project_dir / sso_package_source_dir,
+    }
 for key, value in project_variables.items():
     env[key] = value
 
