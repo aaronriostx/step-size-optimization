@@ -96,3 +96,8 @@ SConscript(
     variant_dir=build_dir,
     exports={"env": env, "project_variables": project_variables},
 )
+
+# Add default target list to help message
+# Add aliases to help message so users know what build target options are available
+# This must come *after* all expected Alias definitions and SConscript files.
+env.ProjectHelp()
