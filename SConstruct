@@ -78,6 +78,8 @@ env.Append(
         "CondaEnvironment": waves.scons_extensions.conda_environment(),
     }
 )
+env.Append(SCANNERS=waves.scons_extensions.sphinx_scanner())
+
 # Dump the Conda environment as documentation of as-built target environment
 environment_target = env.CondaEnvironment(
     target=[env["variant_dir_base"] / "environment.yaml"],
@@ -85,3 +87,12 @@ environment_target = env.CondaEnvironment(
 )
 env.AlwaysBuild(environment_target)
 env.Alias("environment", environment_target)
+
+# Add documentation target(s)
+# Project documentation
+build_dir = env["variant_dir_base"] / documentation_source_dir
+SConscript(
+    documentation_source_dir / "SConscript",
+    variant_dir=build_dir,
+    exports={"env": env, "project_variables": project_variables},
+)
