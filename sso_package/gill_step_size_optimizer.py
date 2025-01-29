@@ -2,6 +2,11 @@
 
 import numpy as np
 
+import sso_package.initial_hs
+import sso_package.central_difference
+import sso_package.conditional_error
+import sso_package.optimal_step_size
+
 def optimize_step_size(func, evaluation_point, error_bound, conditional_error_bounds, max_iters=50, print_info=False):
     """Runs the algorithm to determine optimal step size for first derivative of a function 
 
@@ -26,7 +31,7 @@ def optimize_step_size(func, evaluation_point, error_bound, conditional_error_bo
     upper_bound = conditional_error_bounds[1]
      
     # Compute initial step size
-    hs_initial = compute_initial_hs(func, x1, error_bound)
+    hs_initial = initial_hs(func, x1, error_bound)
     
     # Compute initial phi
     phi = central_difference(func, x1, hs_initial)
