@@ -1,0 +1,19 @@
+#! /usr/bin/env python
+
+import pathlib
+
+# Inherit parent construction environment
+Import("env") # type: ignore
+
+# Set project paths
+sso_package_abspath = env["sso_package_abspath"]
+
+# Workflow variables
+build_directory = pathlib.Path(Dir(".").abspath)
+workflow_name = build_directory.name
+
+# Initialize workflow to build alias for targets
+workflow = []
+
+# Collector alias based on parent directory name
+env.Alias(workflow_name, workflow)
