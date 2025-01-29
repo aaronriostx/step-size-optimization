@@ -11,7 +11,7 @@ import sso_package.conditional_error
 import sso_package.optimal_step_size
 import sso_package.machine_precision
 
-def optimize_step_size(func, evaluation_point, conditional_error_bounds, error_bound=None, max_iters=50, print_info=False):
+def optimize_step_size(func, evaluation_point, lower_c_bound, upper_c_bound, error_bound=None, max_iters=50, print_info=False):
     """Runs the algorithm to determine optimal step size for first derivative of a function 
 
     User-defined function is used and evaluated at the evaluation point. The algorithm
@@ -20,7 +20,8 @@ def optimize_step_size(func, evaluation_point, conditional_error_bounds, error_b
     
     :param function func: Analytical function that takes in single evaluation point
     :param float evaluation_point: Evaluation point passed into the function
-    :param tuple conditional_error_bounds: Lower and upper limit to threshold the conditional error, i.e. (0.001, 0.1)
+    :param float lower_c_bound: Lower bound to threshold the conditional error
+    :param float upper_c_bound: Upper bound to threshold the conditional error
     :param float error_bound: Error bound (Default: Machine precision)
     :param int max_iters: Maximum iterations of the optimization loop (Default: 50)
     :param boolean print_info: Prints the conditional error and optimized step size (Default: False)
@@ -29,10 +30,6 @@ def optimize_step_size(func, evaluation_point, conditional_error_bounds, error_b
     """
     # Evaluation point
     x1 = evaluation_point
-    
-    # Bounds for the conditional error
-    lower_bound = conditional_error_bounds[0]
-    upper_bound = conditional_error_bounds[1]
      
     # Compute initial step size
     hs_initial = initial_hs(func, x1, error_bound)
@@ -51,14 +48,14 @@ def optimize_step_size(func, evaluation_point, conditional_error_bounds, error_b
     iter = 0
     
     # Setup conditional loop
-    while cond_error < lower_bound or cond_error > upper_bound:
+    while cond_error < lower_c_bound or cond_error > upper_c_bound:
         
         # Update hs and phi if conditional error is out of bounds
-        if cond_error > upper_bound:
+        if cond_error > upper_c_bound:
             hs = hs_initial*10
             phi = central_difference(func, x1, hs)
         
-        elif cond_error < lower_bound:
+        elif cond_error < lower_c_bound:
             hs = hs_initial/10
             phi = central_difference(func, x1, hs)
         
@@ -87,14 +84,16 @@ def get_parser():
     cli_description = "Optimize the forward finite difference (FFD) step size using Gill's method"
     parser=argparse.ArgumentParser(description=cli_description, prog=prog)
 
-    parser.add_argument('--func', required=True,
+    parser.add_argument('--func', type=function, required=True,
         help="A single-variable function used to estimate the FFD approximation")
     parser.add_argument('--evaluation_point', type=float, required=True,
         help="The evaluation point for the FFD approximation")
+    parser.add_argument('--lower_c_bound', type=float, default=0.001
+        help="The lower error bound threshold. Default: 0.001")
+    parser.add_argument('--upper_c_bound', type=float, default=0.1
+        help="The upper error bound threshold. Default: 0.1")
     parser.add_argument('--error_bound', type=float, required=False,
         help="The user-defined error bound, typically it is the machine precision")
-    parser.add_argument('--conditional_error_bounds', type=tuple, required=True,
-        help="The user-defined error bound threshold")
     parser.add_argument('--max_iters', type=float, default=50, required=False,
         help="Max iterations to optimize the step size. Default is 50.")
     parser.add_argument('--print_info', type=bool, default=True, required=False,
@@ -108,7 +107,8 @@ if __name__ == '__main__':
     sys.exit(optimize_step_size(func=args.func,
                                 evaluation_point=args.evaluation_point,
                                 error_bound=args.error_bound,
-                                conditional_error_bounds=args.conditional_error_bounds,
+                                lower_c_bound=args.lower_c_bound,
+                                upper_c_bound=args.upper_c_bound,
                                 max_iters=args.max_iters,
                                 print_info=args.print_info
                                 ))
