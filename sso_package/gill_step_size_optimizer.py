@@ -80,7 +80,7 @@ def machine_precision():
     epsilon = sys.float_info.epsilon
     return epsilon
 
-def main(evaluation_point, lower_c_bound, upper_c_bound, error_bound=None, max_iters=50, print_info=False):
+def main(evaluation_point, lower_c_bound, upper_c_bound, output_csv_filename, error_bound=None, max_iters=50, print_info=False):
     """Runs the algorithm to determine optimal step size for first derivative of a function 
 
     User-defined function is used and evaluated at the evaluation point. The algorithm
@@ -90,11 +90,12 @@ def main(evaluation_point, lower_c_bound, upper_c_bound, error_bound=None, max_i
     :param float evaluation_point: Evaluation point passed into the function
     :param float lower_c_bound: Lower bound to threshold the conditional error
     :param float upper_c_bound: Upper bound to threshold the conditional error
+    :param string output_csv_filename: Name of output csv containing algorithm data
     :param float error_bound: Error bound (Default: Machine precision)
     :param int max_iters: Maximum iterations of the optimization loop (Default: 50)
     :param boolean print_info: Prints the conditional error and optimized step size (Default: False)
 
-    :returns: optimized step size for the finite difference calculation
+    :returns: Pandas dataframe containing optimal step size history
     """
     # Set the variable equal to the single-variable function
     func = my_func.my_func
@@ -104,7 +105,7 @@ def main(evaluation_point, lower_c_bound, upper_c_bound, error_bound=None, max_i
     iters_array = []
     cond_error_array = []
     hs_array = []
-    h_optimal = []
+    h_optimal_array = []
 
     # Evaluation point
     x1 = evaluation_point
@@ -132,7 +133,7 @@ def main(evaluation_point, lower_c_bound, upper_c_bound, error_bound=None, max_i
     iters_array.append(iter)
     cond_error_array.append(cond_error)
     hs_array.append(hs_initial)
-    h_optimal.append(h_optimal_initial)
+    h_optimal_array.append(h_optimal_initial)
 
     # Setup optimization loop
     while cond_error < lower_c_bound or cond_error > upper_c_bound:
@@ -147,31 +148,38 @@ def main(evaluation_point, lower_c_bound, upper_c_bound, error_bound=None, max_i
             phi = central_difference(func, x1, hs)
         
         # Compute conditional error with updated values
-        cond_error = conditional_error(error_bound, hs, phi)
+        cond_error_current = conditional_error(error_bound, hs, phi)
+
+        # Compute optimal step size based off current evaluations
+        h_optimal_current = optimal_step_size(error_bound, phi)
 
         # Append initialized values to arrays
         iters_array.append(iter)
-        cond_error_array.append(cond_error)
-        hs_array.append(hs_initial)
-        h_optimal.append(h_optimal_initial)
+        cond_error_array.append(cond_error_current)
+        hs_array.append(hs)
+        h_optimal_array.append(h_optimal_current)
 
         # Update number of iterations
         iter += 1
         if iter >= max_iters:
             break
-        
-    # Compute the optimal step size
-    h_optimal = optimal_step_size(error_bound, phi)
     
     # Print information to console
     if print_info == True:
         print(f'iteration: {iter}')
         print(f'error bound: {error_bound}')
-        print(f'conditional error, in range ({lower_c_bound}, {upper_c_bound}): {cond_error}')
-        print(f'optimized step size: {h_optimal}')
+        print(f'conditional error, in range ({lower_c_bound}, {upper_c_bound}): {cond_error_current}')
+        print(f'optimized step size: {h_optimal_current}')
     
     # Write data to dataframe 
-    
+    df['Iteration'] = iters_array
+    df['Cond. Error'] = cond_error_array
+    df['2nd-order step size'] = hs_array
+    df['1st-order optimal step size'] = h_optimal_array
+
+    # Export to file
+    df.to_csv(output_csv_filename)
+
     return 0
 
 def get_parser():
@@ -186,6 +194,8 @@ def get_parser():
         help="The lower error bound threshold. Default: 0.001")
     parser.add_argument('--upper_c_bound', type=float, default=0.1,
         help="The upper error bound threshold. Default: 0.1")
+    parser.add_argument('--output_csv_filename', type=str, required=False, default="gill_optimizer.csv",
+        help="Name of output csv file if given. Default: gill_optimizer.csv")
     parser.add_argument('--error_bound', type=float, required=False,
         help="The user-defined error bound, typically it is the machine precision")
     parser.add_argument('--max_iters', type=float, default=50, required=False,
@@ -202,6 +212,7 @@ if __name__ == '__main__':
                                 error_bound=args.error_bound,
                                 lower_c_bound=args.lower_c_bound,
                                 upper_c_bound=args.upper_c_bound,
+                                output_csv_filename=args.output_csv_filename,
                                 max_iters=args.max_iters,
                                 print_info=args.print_info
                                 ))
