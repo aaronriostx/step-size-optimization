@@ -1,5 +1,7 @@
 #! /usr/bin/env python
 
+import numpy as np
+
 def conditional_error(error_bound, hs, phi):
     """Computes the conditional error from user-defined error bound, current step size and 
     2nd-order central difference derivative approximation (phi).
