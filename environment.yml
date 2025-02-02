@@ -14,5 +14,9 @@ dependencies:
   - scons>=4.6
   - scipy
   - seaborn
+  - sphinx >=7.1
+  - sphinx-argparse
+  - sphinx-book-theme
+  - sphinxcontrib-bibtex
   - waves
   - xarray
