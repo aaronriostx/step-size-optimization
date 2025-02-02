@@ -4,13 +4,6 @@
    :end-before: target-end-do-not-remove
 
 .. General references
-.. _`AEA Compute environment`: https://aea.re-pages.lanl.gov/developer-operations/aea_compute_environment/aea_compute_environment.html
-.. _`AEA Conda channel`: https://aea.re-pages.lanl.gov/developer-operations/aea_compute_environment/aea_compute_environment.html#aea-conda-channel
-.. _`AEA Gitlab group members`: https://re-git.lanl.gov/groups/aea/-/group_members
-.. _`AEA Gitlab group`: https://re-git.lanl.gov/aea
-.. _`ASC RE Gitlab HPC Accounts`: https://hpcaccounts.lanl.gov/projects/request/asc-re-gitlab
-.. _`ASC RE Gitlab User Documentation`: https://re-git.lanl.gov/help/user/index.md
-.. _`ASC RE Gitlab`: https://re-git.lanl.gov/
 .. _`Anaconda Documentation`: https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
 .. _`Argparse type`: https://docs.python.org/3.12/library/argparse.html#type
 .. _`Argparse tutorial`: https://docs.python.org/3/howto/argparse.html
@@ -151,3 +144,4 @@
 .. _`MODSIM-TEMPLATE environment file`: https://github.com/lanl-aea/waves/blob/main/waves/modsim_template/environment.yml
 
 .. email addresses
+.. _`G. Aaron Rios`: gaaronrios@gmail.com
