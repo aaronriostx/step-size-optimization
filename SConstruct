@@ -74,6 +74,9 @@ for key, value in project_variables.items():
 sys.path.insert(0, str(project_dir))
 env.PrependENVPath("PYTHONPATH", project_dir)
 
+# Find required programs for conditional target ignoring and absolute path for use in target actions
+env["SPHINX_BUILD"] = env.AddProgram(["sphinx-build"])
+
 # Add WAVES builders
 env.Append(
     BUILDERS={
