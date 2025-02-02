@@ -4,7 +4,7 @@ name: Deploy static content to Pages
 on:
   push:
     branches:
-      - "4-deploy-initial-documentation-through-github-pages"
+      - "dev"
   workflow_dispatch:
 
 permissions:
