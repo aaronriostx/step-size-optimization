@@ -57,7 +57,7 @@ Steps needed for a release include:
 2. Modify ``docs/changelog.rst`` to move version number for release MR commit and add description as relevant.
 3. Check and update the ``CITATION.bib``, ``CITATION.cff``, and ``waves/modsim_template/docs/references.bib`` file to
    use the new version number and release date.
-4. Commit changes and submit a merge request to the ``main`` branch at the `upstream repository`_.
+4. Commit changes and submit a merge request to the ``main`` branch.
 5. Solicit feedback and make any required changes.
 6. Immediately prior to merge, add the new version tag to the most recent commit.
 
