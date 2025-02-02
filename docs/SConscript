@@ -46,14 +46,10 @@ documentation_files = [
     "devops.rst",
     "glossary.rst",
     "index.rst",
-    "mesh_convergence.rst",
-    "nominal.rst",
     "release_philosophy.rst",
-    "simulation_summary.rst",
     "user.rst",
     "zreferences.rst",
     # Found in conf.py, which is not scanned for implicit dependencies
-    "waves_logo_brandmark_smaller.png",
     "targets.txt",
     "_static/custom.css",
 ]
