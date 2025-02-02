@@ -35,8 +35,6 @@
 .. _`GNU sed`: https://www.gnu.org/software/sed/
 .. _`GNU tar`: https://www.gnu.org/software/tar/
 .. _`conda-forge sed`: https://anaconda.org/conda-forge/sed
-.. _`Gitlab`: https://about.gitlab.com/
-.. _`Gitlab Flow`: https://docs.gitlab.com/ee/topics/gitlab_flow.html
 .. _`GitHub`: https://github.com/
 .. _`Bitbucket`: https://www.atlassian.com/software/bitbucket
 .. _`Gmsh`: https://gmsh.info/
@@ -146,30 +144,10 @@
 .. _`ENOVIA`: https://www.3ds.com/products/enovia
 
 .. Project specific links
-.. _`Gitlab project issues`: https://re-git.lanl.gov/aea/python-projects/waves/-/issues
 .. _`WAVES tutorials abaqus source files`: https://github.com/lanl-aea/waves/tree/main/waves/tutorials/modsim_package/abaqus
 .. _`WAVES quickstart source files`: https://github.com/lanl-aea/waves/tree/main/waves/tutorials/waves_quickstart
 .. _`SCons quickstart source files`: https://github.com/lanl-aea/waves/tree/main/waves/tutorials/scons_quickstart
 .. _`WAVES tutorials`: https://github.com/lanl-aea/waves/tree/main/waves/tutorials
 .. _`MODSIM-TEMPLATE environment file`: https://github.com/lanl-aea/waves/blob/main/waves/modsim_template/environment.yml
-.. _`upstream repository`: https://re-git.lanl.gov/aea/python-projects/waves
-.. _`CITATION`: https://github.com/lanl-aea/waves/blob/main/CITATION.bib
-
-.. Abaqus reference links
-.. _`Abaqus *INCLUDE`: https://help.3ds.com/2023/english/dssimulia_established/SIMACAEKEYRefMap/simakey-r-include.htm
-.. _`Abaqus Assembly Definition`: https://help.3ds.com/2023/english/dssimulia_established/SIMACAEMODRefMap/simamod-c-partassy.htm
-.. _`Abaqus Element Sets`: https://help.3ds.com/2023/english/dssimulia_established/SIMACAEMODRefMap/simamod-c-element.htm?contextscope=all#simamod-c-element-t-GroupingElementsIntoElementSets-sma-topic9
-.. _`Abaqus Elements Guide`: https://help.3ds.com/2023/english/dssimulia_established/SIMACAEELMRefMap/simaelm-c-ov.htm
-.. _`Abaqus File Extension Definitions`: https://help.3ds.com/2023/english/dssimulia_established/SIMACAEEXCRefMap/simaexc-c-fileextensions.htm
-.. _`Abaqus Model Object`: https://help.3ds.com/2023/english/dssimulia_established/SIMACAEKERRefMap/simaker-c-modelpyc.htm
-.. _`Abaqus Node Sets`: https://help.3ds.com/2023/english/dssimulia_established/SIMACAEMODRefMap/simamod-c-node.htm?contextscope=all#simamod-c-node-t-GroupingNodesIntoNodeSets-sma-topic8
-.. _`Abaqus Precision Level for Executables`: https://help.3ds.com/2023/english/dssimulia_established/SIMACAEANLRefMap/simaanl-c-over.htm?contextscope=all#simaanl-c-over-precision
-.. _`Abaqus Python Environment`: https://help.3ds.com/2023/english/dssimulia_established/SIMACAECMDRefMap/simacmd-m-PdeUsing-sb.htm
-.. _`Abaqus Scripting`: https://help.3ds.com/2023/english/dssimulia_established/SIMACAECMDRefMap/simacmd-c-ov.htm
-.. _`Abaqus Standard/Explicit Execution`: https://help.3ds.com/2023/english/dssimulia_established/simacaeexcrefmap/simaexc-c-analysisproc.htm
-.. _`Mesh Convergence`: https://help.3ds.com/2023/english/dssimulia_established/simacaegsarefmap/simagsa-c-ctmmeshconverg.htm
 
 .. email addresses
-.. _`w13dev`: w13dev@lanl.gov
-.. _`Christopher Long`: cclong@lanl.gov
-.. _`Chris Johnson`: clj@lanl.gov
